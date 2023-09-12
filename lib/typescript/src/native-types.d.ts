@@ -1440,7 +1440,10 @@ type ReactNativeHealthkitTypeNative = {
      */
     readonly disableAllBackgroundDelivery: () => Promise<boolean>;
     readonly saveCorrelationSample: <TIdentifier extends HKCorrelationTypeIdentifier, TSamples extends readonly (HKCategorySampleRawForSaving | HKQuantitySampleRawForSaving)[]>(typeIdentifier: TIdentifier, samples: TSamples, start: string, end: string, metadata: MetadataMapperForCorrelationIdentifier<TIdentifier>) => Promise<boolean>;
-    readonly saveWorkoutSample: (typeIdentifier: HKWorkoutActivityType, quantities: readonly HKQuantitySampleRawForSaving[], start: string, end: string, metadata: HKWorkoutMetadata) => Promise<string | null>;
+    readonly saveWorkoutSample: (typeIdentifier: HKWorkoutActivityType, quantities: readonly HKQuantitySampleRawForSaving[], start: string, end: string, totals: {
+        readonly distance?: number;
+        readonly energyBurned?: number;
+    }, metadata: HKWorkoutMetadata) => Promise<string | null>;
     readonly saveWorkoutRoute: (workoutUUID: string, locations: readonly CLLocationRawForSaving[]) => Promise<boolean>;
     readonly queryCorrelationSamples: <TIdentifier extends HKCorrelationTypeIdentifier>(typeIdentifier: TIdentifier, from: string, to: string) => Promise<readonly HKCorrelationRaw<TIdentifier>[]>;
     subscribeToObserverQuery(identifier: HKSampleTypeIdentifier): Promise<QueryId>;
